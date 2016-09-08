@@ -20,20 +20,18 @@ public class App extends Application // VERSION 1
     public void start(Stage primaryStage) {
         Button playButton = new Button();
         playButton.setText("Play Scale");
-        playButton.setBackground( new Background(new BackgroundFill(Color.LIME, CornerRadii.EMPTY, Insets.EMPTY)));
+        playButton.setStyle("-fx-base: #00FF00;");
         playButton.setOnAction(event -> System.out.println("playButton clicked"));
 
         Button stopButton = new Button();
         stopButton.setText("Stop Playing");
-        stopButton.setBackground( new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
+        stopButton.setStyle("-fx-base: #FF8888;");
         stopButton.setOnAction(event -> System.out.println("stopButton clicked"));
 
         StackPane root = new StackPane();
-        HBox buttonPane = new HBox(5.0);
+        HBox buttonPane = new HBox(5.0,playButton,stopButton);
         buttonPane.setAlignment(Pos.CENTER);
-        buttonPane.getChildren().addAll(playButton,stopButton);
         root.getChildren().add(buttonPane);
-
 
         Scene scene = new Scene(root, 300, 250);
 
