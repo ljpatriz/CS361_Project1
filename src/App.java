@@ -16,7 +16,7 @@ public class App extends Application // VERSION 1
     @Override
     public void start(Stage primaryStage) {
         Button button = new Button();
-        button.setText("Click Me");
+        button.setText("Hello World");
 
         StackPane root = new StackPane();
         root.getChildren().add(button);
