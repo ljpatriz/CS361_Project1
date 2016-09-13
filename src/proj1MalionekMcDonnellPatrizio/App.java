@@ -1,4 +1,4 @@
-/*
+package proj1MalionekMcDonnellPatrizio;/*
  * File: Main.java
  * Author: Joseph Malionek
  * Course: CS361
@@ -19,10 +19,15 @@ import javafx.stage.Stage;
  */
 public class App extends Application // VERSION 1
 {
+    /**The volume at which the scale will play */
     final int VOLUME = 64;
+    /**The number of beats per minute the midi player will play at*/
     final int BPM = 100;
+    /**The number of ticks that will be counted in a beat*/
     final int TICKS_PER_BEAT = 4;
+    /**The duration of the notes (in ticks) of the notes of the scale*/
     final int NOTE_DURATION = 4;
+    /**The midi player which plays the scale*/
     private MidiPlayer midiPlayer = new MidiPlayer(TICKS_PER_BEAT,BPM);
 
     /**Sets the layout of the app and starts it running
