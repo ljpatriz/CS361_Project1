@@ -6,7 +6,7 @@
  * Date: September 6, 2016
  */
 
-package sample;
+package proj1MalionekMcdonellPatrizio;
 import javax.sound.midi.*;
 
 /**
