@@ -89,8 +89,8 @@ public class Main extends Application {
 
     /**
      * Opens a a text input dialog with the given title and prompt. This dialog does not allow the
-     * user to input anything other than digits.  If the user hits okay with an integer entered,
-     * this method will return said integer. Otherwise this will return an empty Optional<Integer>.
+     * user to input anything other than digits.  If the user hits okay with an (positive) integer
+     * entered, this method will return said integer. Otherwise this will return an empty Optional<Integer>.
      *
      * @param title The title of the dialog box
      * @param prompt The prompt given to the user in the dialog box
@@ -112,7 +112,7 @@ public class Main extends Application {
 
     /**
      * Prompts the user for a note and plays the scale if a valid integer (an integer in the range
-     * of 0-115) is input and the user hits okay. This stops any currently playing sounds and plays
+     * of 0-115) is entered and the user hits okay. This stops any currently playing sounds and plays
      * a major scale starting at the given note.
      * An InvalidMidiDataException is thrown by the MidiPlayer if the starting note is above 115.
      */
