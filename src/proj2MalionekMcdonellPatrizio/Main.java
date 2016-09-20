@@ -133,7 +133,7 @@ public class Main extends Application {
 
 
     /**
-     * Stops and clears the midi player queue
+     * Stops and clears the midi player queue, stopping all sound
      */
     public void stopPlayer()
     {
