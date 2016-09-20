@@ -1,12 +1,12 @@
 /*
  * File: MidiPlayer.java
- * Names: Dale Skrien
+ * Names: Joseph Malionek, Kyle McDonell, Larry Patrizio
  * Class: CS361
- * Project: 1
- * Date: September 6, 2016
+ * Project 2
+ * Date: September 19
  */
 
-package proj1MalionekMcdonellPatrizio;
+package proj2MalionekMcdonellPatrizio;
 import javax.sound.midi.*;
 
 /**

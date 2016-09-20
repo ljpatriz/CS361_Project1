@@ -1,0 +1,23 @@
+/*
+ * File: Main.css
+ * Names: Joseph Malionek, Kyle McDonell, Larry Patrizio
+ * Class: CS361
+ * Project 2
+ * Date: September 19
+ *
+ * Main style sheet for the application
+ *
+ */
+
+
+/* CSS for the object labeled playButton
+   Sets the color to light green */
+#playButton {
+    -fx-base: #99FF66
+}
+
+/* CSS for the object labeled stopButton
+   Sets the color to light red */
+#stopButton {
+    -fx-base: #FF8888
+}
