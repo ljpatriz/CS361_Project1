@@ -19,6 +19,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 
 /**
@@ -59,10 +60,9 @@ public class Main extends Application {
     @FXML // This method is called by the FXMLLoader when initialization is complete
     private void initialize() {
         exitButton.setOnAction(event -> stop());
-        playButton.setOnAction(event -> openNoteDialog());
+        playButton.setOnAction(event -> notePromptAndPlay());
         stopButton.setOnAction(event -> stopPlayer());
     }
-
 
     /**
      * The main method for this javafx program which handles setting up the layout, controls, and
@@ -87,33 +87,40 @@ public class Main extends Application {
     public void stop() { System.exit(0); }
 
 
-
     /**
-     * Opens a dialog asking the user for a starting note at which to play a scale.  If the dialog
-     * is completed, any playing notes are stopped and the selected scale is played.
-     * An InvalidMidiDataException is thrown by the player if the starting note is above 115.
+     * Opens a a text input dialog with the given title and prompt. This dialog does not allow the
+     * user to input anything other than digits.  If the user hits okay with an integer entered,
+     * this method will return said integer. Otherwise this will return an empty Optional<Integer>.
+     *
+     * @param title The title of the dialog box
+     * @param prompt The prompt given to the user in the dialog box
+     * @return an Optional<Integer> which is non-empty if the user enters an integer and hits okay
      */
-    public void openNoteDialog()
+    public Optional<Integer> getUserIntegerInput(String title, String prompt)
     {
         TextInputDialog startingNoteDialog = new TextInputDialog();
-        startingNoteDialog.setTitle("Starting Note");
-        startingNoteDialog.setHeaderText("Give me a starting note (0-115):");
+        startingNoteDialog.setTitle(title);
+        startingNoteDialog.setHeaderText(prompt);
 
-        // Prevent characters other than 0-9 from being entered (we recognize this was not necessary)
+        // Prevent characters other than 0-9 from being entered
         TextFormatter decimalFilter = new TextFormatter<>(c -> c.getText().matches("\\d*") ? c : null);
         startingNoteDialog.getEditor().setTextFormatter(decimalFilter);
-        // Needs an error for no number or out of bounds!
 
-        // If they hit OK, parse their input and play the scale
-        startingNoteDialog.showAndWait().ifPresent(
-                selection -> {
-                    int startNote = Integer.parseInt(selection);
-                    stopPlayer();
-                    playScale(startNote);
-                });
+        // Return an optional containing their input as an integer, or empty if there is no integer
+        return startingNoteDialog.showAndWait().filter(str -> !str.isEmpty()).map(Integer::parseInt);
     }
 
-
+    /**
+     * Prompts the user for a note and plays the scale if a valid integer (an integer in the range
+     * of 0-115) is input and the user hits okay. This stops any currently playing sounds and plays
+     * a major scale starting at the given note.
+     * An InvalidMidiDataException is thrown by the MidiPlayer if the starting note is above 115.
+     */
+    public void notePromptAndPlay()
+    {
+        getUserIntegerInput("Starting Note", "Give me a starting note (0-115):")
+            .ifPresent(input -> { stopPlayer(); playScale(input); });
+    }
 
     /**
      * Plays a scale up and down starting from startNote. An InvalidMidiDataException is thrown by
@@ -122,6 +129,7 @@ public class Main extends Application {
      */
     public void playScale(int startNote)
     {
+        System.out.println(startNote);
         //The notes of a scale up and then down when starting from 0 and with a half-step being 1
         int[] notes = {0,2,4,5,7,9,11,12,12,11,9,7,5,4,2,0};
         for(int i=0; i<notes.length; i++)
